@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<h1> Hello there </h1>
+<h1>File Upload</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.crf_token }}
+    {{ form.image }}
+    <button type="submit">Upload</button>
+</form>
+<hr>
+    {% for file in files %}
+      <img src="{{ url_for('upload', filename=file) }}" style="width: 64px">
+    {% endfor %}
 {% endblock %}
