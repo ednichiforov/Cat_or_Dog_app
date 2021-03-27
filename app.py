@@ -1,5 +1,9 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES
+from model import make_prediction
+from pathlib import Path
+import os
+import shutil
 
 app = Flask(__name__)
 
@@ -16,7 +20,13 @@ configure_uploads(app, photos)
 def upload():
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
-        return filename
+        filename_path = os.path.join(Path('uploads'), filename)
+        cat_or_dog = make_prediction(filename_path)
+        try:
+            shutil.rmtree('uploads')
+        except OSError as e:
+            print("Error: %s - %s." % (e.filename, e.strerror))
+        return "It's a {}".format(cat_or_dog)
 
     return render_template('index.html')
 
