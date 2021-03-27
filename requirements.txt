@@ -1,0 +1,16 @@
+Flask - 1.1.2
+flask_uploads
+Pillow - 8.1.2
+tensorflow
+
+Python 3.8
+
+If you have an error
+
+In flask_uploads.py
+Change
+
+from werkzeug import secure_filename,FileStorage
+to
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
