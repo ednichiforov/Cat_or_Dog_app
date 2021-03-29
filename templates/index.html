@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
 <title> Main </title>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
 
 {% block body %}
 
-    <h2>Select a file to upload</h2>
-    <hr>
+<h2>Select a file to upload</h2>
+<hr>
 
-    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-
-    <input type=file name=photo>
-    <input type="submit" class="btn btn-success">
-
+<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+<input type=file name=photo accept=".jpg, .jpeg">
+<input type="submit" class="btn btn-success">
 </form>
-
-</div>
 
 {% endblock %}
