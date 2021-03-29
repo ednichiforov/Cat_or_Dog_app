@@ -18,11 +18,11 @@ configure_uploads(app, photos)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
-    if request.method == 'POST' and 'photo' in request.files:
-        if 'file' not in request.files:
+    if request.method == 'POST':
+        if request.files['photo'].filename == "":
             flash("No file chosen")
             return redirect(request.url)
-        else:
+        elif 'photo' in request.files:
             filename = photos.save(request.files['photo'])
             filename_path = os.path.join(Path('uploads'), filename)
             cat_or_dog = make_prediction(filename_path)
