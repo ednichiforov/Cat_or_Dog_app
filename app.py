@@ -1,9 +1,10 @@
+import os
+import shutil
+from pathlib import Path
 from flask import Flask, render_template, request, redirect, flash
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from model import make_prediction
-from pathlib import Path
-import os
-import shutil
+
 
 app = Flask(__name__)
 
@@ -35,4 +36,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
