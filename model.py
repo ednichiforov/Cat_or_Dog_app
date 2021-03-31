@@ -12,7 +12,7 @@ def make_prediction(image_path):
     img_width = 224
     img_height = 224
 
-    model_path = Path("TEST")
+    model_path = Path("Mymodel")
     model = load_model(model_path)
     model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
